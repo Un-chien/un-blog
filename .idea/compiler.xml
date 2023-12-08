@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="un-blog-api" />
+        <module name="un-blog-article" />
+        <module name="un-blog-system" />
+        <module name="un-blog-generator" />
+        <module name="un-blog-question" />
+        <module name="un-blog-util" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="un-blog" options="-parameters" />
+      <module name="un-blog-api" options="-parameters" />
+      <module name="un-blog-article" options="-parameters" />
+      <module name="un-blog-generator" options="-parameters" />
+      <module name="un-blog-question" options="-parameters" />
+      <module name="un-blog-system" options="-parameters" />
+      <module name="un-blog-util" options="-parameters" />
+    </option>
+  </component>
+</project>

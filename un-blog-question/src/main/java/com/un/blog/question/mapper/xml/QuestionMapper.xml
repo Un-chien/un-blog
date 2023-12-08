@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.un.blog.question.mapper.QuestionMapper">
+
+    <select id="findListByLabelId" resultType="Question">
+        SELECT DISTINCT
+            m1.*
+        FROM
+            un_question m1
+         LEFT JOIN un_question_label m2 ON m1.id = m2.question_id
+        WHERE
+            M1.`status` != 0
+            AND m2.label_id = #{labelId}
+        ORDER BY
+            m1.update_date
+    </select>
+
+    <select id="findQuestionAndLabelIdsById" resultMap="QuestionAndLabelIdsMap">
+        SELECT m1.*,m2.label_id FROM un_question m1 left join un_question_label m2 on m1.id = m2.question_id
+        WHERE M1.id = #{id}
+    </select>
+
+    <resultMap id="QuestionAndLabelIdsMap" type="Question">
+        <id column="id" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="nick_name" property="nickName"></result>
+        <result column="user_image" property="userImage"></result>
+        <result column="title" property="title"></result>
+        <result column="md_content" property="mdContent"></result>
+        <result column="html_content" property="htmlContent"></result>
+        <result column="view_count" property="viewCount"></result>
+        <result column="thumhup" property="thumhup"></result>
+        <result column="reply" property="reply"></result>
+        <result column="status" property="status"></result>
+        <result column="create_date" property="createDate"></result>
+        <result column="update_date" property="updateDate"></result>
+        <collection property="labelIds" javaType="list" ofType="string">
+            <id column="label_id" property="id"/>
+        </collection>
+    </resultMap>
+
+<!--    通过问题id删除中间表-->
+    <delete id="deleteQuestionLabel">
+        DELETE FROM un_question_label WHERE question_id = #{questionId}
+    </delete>
+
+    <insert id="saveQuestionLabel">
+        INSERT INTO un_question_label(id,question_id,label_id) VALUES
+        <foreach collection="labelIds" item="item" separator=",">
+            ('${@com.baomidou.mybatisplus.core.toolkit.IdWorker@getId()}',#{questionId},#{item})
+        </foreach>
+    </insert>
+</mapper>

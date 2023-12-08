@@ -1,0 +1,30 @@
+swagger常用注释
+在类或者方法书写swagger相关注释，即可自动声场接口文档
+@Api 用在controller类上，描述该接口作用，参数
+    value 简要说明
+    description 详细说明
+@ApiOperation controller方法上，描述方法作用
+@ApiModel 用在实体类上
+
+nacos配置管理的优势
+1. 集中管理配置文件
+2. 不同环境不同配置，动态化的配置更新，根据不同环境部署，不如dev/prod
+3. 运行期间动态调整配置，不再需要每个服务器机器上分别部署配置
+4. 配置信息，以rest接口形式暴露
+
+${prefix}-${spring.profiles.active}.${file-extension}
+prefix--与spring.application.name一直 如article-server
+spring.profiles.active- dev/prod 可以省略，但省略是 - 也要一起省略
+file-extension 文件扩展名
+
+article-server-dev.yml
+article-server.yml
+
+feign
+作用：远程方法调用
+netflix springcloud对feign做了封装
+
+微服务通过feign调用远程接口，定义接口时，使用springmvc注解用于接收请求
+@PathVariable 获取路径变量值  "/{id}"
+@RequestParam 获取请求参数值  "/id=1"
+@RequestBody 获取json 针对普通数据集合参数，使用List<String>，获取时 (@ResponseBody String[] ids)使用数组接收
